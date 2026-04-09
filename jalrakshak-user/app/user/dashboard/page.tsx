@@ -30,12 +30,21 @@ export default function Dashboard() {
           fetch(apiUrl("/sensor")),
           fetch(apiUrl("/insights"))
         ]);
-        const sData = await sRes.json();
-        setSensorData(sData);
-        const iData = await iRes.json();
-        setInsights(iData.insights || []);
+        
+        if (sRes.ok) {
+          const sData = await sRes.json();
+          setSensorData(sData);
+        }
+        
+        if (iRes.ok) {
+          const iData = await iRes.json();
+          setInsights(iData.insights || []);
+        }
+      } catch (err) {
+        // Silently handle errors - show null state
+      } finally {
         setLoading(false);
-      } catch (err) { console.error(err); }
+      }
     };
     fetchAll();
     const interval = setInterval(fetchAll, 5000);

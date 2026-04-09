@@ -7,9 +7,15 @@ export default function AlertSystem() {
 
   useEffect(() => {
     fetch("/api/alerts")
-      .then(res => res.json())
+      .then(res => {
+        if (res.ok) return res.json();
+        return null;
+      })
       .then(data => {
-        if (data.alert) setAlert(data.alert);
+        if (data?.alert) setAlert(data.alert);
+      })
+      .catch(() => {
+        // Silently handle errors
       });
   }, []);
 

@@ -27,8 +27,16 @@ export default function AIInsights() {
 
   useEffect(() => {
     fetch(apiUrl("/sensor"))
-      .then(res => res.json())
-      .then(data => setSensor(data));
+      .then(res => {
+        if (res.ok) return res.json();
+        return null;
+      })
+      .then(data => {
+        if (data) setSensor(data);
+      })
+      .catch(() => {
+        // Silently handle errors
+      });
   }, []);
 
   const toggleSymptom = (symptom: string) => {

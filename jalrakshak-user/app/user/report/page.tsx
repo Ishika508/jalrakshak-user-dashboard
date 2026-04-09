@@ -44,10 +44,7 @@ export default function ReportPage() {
       }
     );
 
-    // 👇 check response BEFORE parsing JSON
     if (!res.ok) {
-      const text = await res.text();
-      console.error("Server response:", text);
       throw new Error("API failed");
     }
 
@@ -57,8 +54,7 @@ export default function ReportPage() {
     setSubmitted(true);
 
   } catch (err) {
-    console.error(err);
-    alert("Submission failed");
+    alert("Unable to submit report. Please try again later or check your connection.");
   }
 };
 

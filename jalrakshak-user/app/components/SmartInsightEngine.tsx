@@ -29,25 +29,36 @@ export default function SmartInsightEngine() {
         fetch(apiUrl("/sensor")),
         fetch(apiUrl("/insights"))
       ]);
-      const sensorData = await sRes.json();
-      const insightData = await iRes.json();
+      
+      let sensorData = null;
+      let insightData = null;
+      
+      if (sRes.ok) {
+        sensorData = await sRes.json();
+        setSensor(sensorData);
+      }
+      
+      if (iRes.ok) {
+        insightData = await iRes.json();
+        setInsights(insightData.insights || []);
+      }
 
-      setSensor(sensorData);
-      setInsights(insightData.insights || []);
+      // Only update AI result if sensor data is available
+      if (sensorData) {
+        const risk = sensorData.tds > 500 || sensorData.ph > 8.5 || sensorData.ph < 6.5
+            ? "Contamination Likely"
+            : "Water Safe";
 
-      const risk = sensorData.tds > 500 || sensorData.ph > 8.5 || sensorData.ph < 6.5
-          ? "Contamination Likely"
-          : "Water Safe";
-
-      setAiResult({
-        status: risk,
-        prediction: risk === "Contamination Likely"
-            ? "Possible storage contamination or pipeline disturbance detected."
-            : "Water quality stable. Continue monitoring.",
-        confidence: risk === "Water Safe" ? "98.2%" : "84.5%"
-      });
+        setAiResult({
+          status: risk,
+          prediction: risk === "Contamination Likely"
+              ? "Possible storage contamination or pipeline disturbance detected."
+              : "Water quality stable. Continue monitoring.",
+          confidence: risk === "Water Safe" ? "98.2%" : "84.5%"
+        });
+      }
     } catch (err) {
-      console.error("Smart Insight Error:", err);
+      // Silently handle errors
     } finally {
       // Small delay to make the "Scan" feel real
       setTimeout(() => setIsScanning(false), 1200);
