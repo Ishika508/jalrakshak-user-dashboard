@@ -1,0 +1,17 @@
+{
+  "name": "jalrakshak",
+  "version": "1.0.0",
+  "description": "JalRakshak - Water Quality Monitoring System",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"cd jalrakshak-backend && npm start\" \"cd jalrakshak-user && npm run dev\"",
+    "build": "cd jalrakshak-user && npm run build",
+    "start": "concurrently \"cd jalrakshak-backend && npm start\" \"cd jalrakshak-user && npm start\"",
+    "backend": "cd jalrakshak-backend && npm start",
+    "frontend": "cd jalrakshak-user && npm run dev",
+    "install-all": "cd jalrakshak-backend && npm install && cd ../jalrakshak-user && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

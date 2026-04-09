@@ -1,9 +1,9 @@
 services:
   - type: web
-    name: jalrakshak-user
+    name: jalrakshak
     runtime: node
-    buildCommand: cd jalrakshak-user && npm install && npm run build
-    startCommand: cd jalrakshak-user && npm start
+    buildCommand: npm run install-all && npm run build
+    startCommand: npm start
     envVars:
       - key: NODE_ENV
         value: production
