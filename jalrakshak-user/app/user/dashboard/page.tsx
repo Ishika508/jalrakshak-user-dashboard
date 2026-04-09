@@ -13,6 +13,7 @@ import LiveSensorGraph from "../../components/LiveSensorGraph";
 import AITimeline from "../../components/AITimeline";
 import RiskMap from "../../components/RiskMap";
 import AlertSystem from "../../components/AlertSystem";
+import { apiUrl } from "../../lib/api";
 
 type Insight = { type: string; message: string; };
 
@@ -26,8 +27,8 @@ export default function Dashboard() {
     const fetchAll = async () => {
       try {
         const [sRes, iRes] = await Promise.all([
-          fetch("http://localhost:5000/api/sensor"),
-          fetch("http://localhost:5000/api/insights")
+          fetch(apiUrl("/sensor")),
+          fetch(apiUrl("/insights"))
         ]);
         const sData = await sRes.json();
         setSensorData(sData);
@@ -115,7 +116,7 @@ export default function Dashboard() {
         </button>
       </section>
 
-      <SmartInsightEngine sensorData={sensorData} insights={insights} riskLevel={risk.label} />
+      <SmartInsightEngine />
 
       <section className="grid md:grid-cols-2 gap-8">
         <div className="premium-panel p-6"><LiveSensorGraph /></div>

@@ -12,6 +12,7 @@ import {
   AlertCircle,
   RefreshCw
 } from "lucide-react";
+import { apiUrl } from "../lib/api";
 
 type Insight = { type: string; message: string; };
 
@@ -25,8 +26,8 @@ export default function SmartInsightEngine() {
     setIsScanning(true);
     try {
       const [sRes, iRes] = await Promise.all([
-        fetch("http://localhost:5000/api/sensor"),
-        fetch("http://localhost:5000/api/insights")
+        fetch(apiUrl("/sensor")),
+        fetch(apiUrl("/insights"))
       ]);
       const sensorData = await sRes.json();
       const insightData = await iRes.json();

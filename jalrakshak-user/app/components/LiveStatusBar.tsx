@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Radio, BrainCircuit, CloudZap, ShieldCheck } from "lucide-react";
+import { Radio, BrainCircuit, ShieldCheck } from "lucide-react";
 
 export default function LiveStatusBar() {
   const [time, setTime] = useState("");

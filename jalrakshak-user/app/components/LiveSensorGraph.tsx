@@ -8,9 +8,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer,
-  Defs,
-  LinearGradient
+  ResponsiveContainer
 } from "recharts";
 import { Activity } from "lucide-react";
 

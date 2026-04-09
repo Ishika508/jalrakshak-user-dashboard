@@ -11,7 +11,7 @@
     "frontend": "cd jalrakshak-user && npm run dev",
     "install-all": "cd jalrakshak-backend && npm install && cd ../jalrakshak-user && npm install"
   },
-  "devDependencies": {
+  "dependencies": {
     "concurrently": "^8.2.2"
   }
 }

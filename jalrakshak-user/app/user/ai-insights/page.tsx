@@ -6,6 +6,7 @@ import {
   Wind, Users, Calendar, Upload, 
   AlertCircle, ShieldCheck, Activity, Info
 } from "lucide-react";
+import { apiUrl } from "../../lib/api";
 
 const symptomsList = [
   "Diarrhea", "Vomiting", "Fever", "Skin Irritation",
@@ -25,7 +26,7 @@ export default function AIInsights() {
   const [sensor, setSensor] = useState<any>(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/sensor")
+    fetch(apiUrl("/sensor"))
       .then(res => res.json())
       .then(data => setSensor(data));
   }, []);

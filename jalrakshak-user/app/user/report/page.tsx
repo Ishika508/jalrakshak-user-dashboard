@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { apiUrl } from "../../lib/api";
 
 const symptoms = [
   "Diarrhea",
@@ -30,7 +31,7 @@ export default function ReportPage() {
 
   try {
     const res = await fetch(
-      "http://localhost:5000/api/users/report",
+      apiUrl("/users/report"),
       {
         method: "POST",
         headers: {
